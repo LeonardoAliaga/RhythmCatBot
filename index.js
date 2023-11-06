@@ -8,8 +8,9 @@ const {
   REST,
   Routes,
 } = require("discord.js");
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages] });
 const { clientId, guildId, token } = require("./config.json");
+
 
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, "commands");
@@ -93,5 +94,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
 client.once(Events.ClientReady, (c) => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
 });
+
+
+
 
 client.login(token);
