@@ -1,17 +1,35 @@
-const fs = require("fs");
-const path = require("path");
 const {
   Client,
   Collection,
-  Events,
   GatewayIntentBits,
   REST,
   Routes,
 } = require("discord.js");
+const { DisTube } = require("distube");
+const { SpotifyPlugin } = require("@distube/spotify");
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages] });
-const { clientId, guildId, token } = require("./config.json");
+const { clientId, guildId, token } = require("./config.json");const fs = require("fs");
+const path = require("path");
+
+// Create a new DisTube
+const distube = new DisTube(client, {
+  searchSongs: 5,
+  emitNewSongOnly: true,
+  searchCooldown: 30,
+  leaveOnEmpty: false,
+  leaveOnFinish: false,
+  leaveOnStop: false,
+  plugins: [
+    new SpotifyPlugin({
+      parallel: true,
+      emitEventsAfterFetching: false,
+    }),
+  ],
+  //youtubeCookie: JSON.stringify(JSON.parse(fs.readFileSync("cookies.json"))),
+});
 
 
+//Command Handler
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, "commands");
 const commandFolders = fs.readdirSync(foldersPath);
@@ -35,6 +53,21 @@ for (const folder of commandFolders) {
   }
 }
 
+//Event Handler
+const eventsPath = path.join(__dirname, "events");
+const eventFiles = fs
+  .readdirSync(eventsPath)
+  .filter((file) => file.endsWith(".js"));
+
+for (const file of eventFiles) {
+  const filePath = path.join(eventsPath, file);
+  const event = require(filePath);
+  if (event.once) {
+    client.once(event.name, (...args) => event.execute(...args, distube));
+  } else {
+    client.on(event.name, (...args) => event.execute(...args, distube));
+  }
+}
 
 // Construct and prepare an instance of the REST module
 const rest = new REST().setToken(token);
@@ -62,40 +95,6 @@ const commands = client.commands.map((command) => command.data.toJSON());
     console.error(error);
   }
 })();
-
-client.on(Events.InteractionCreate, async (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
-
-  const command = interaction.client.commands.get(interaction.commandName);
-
-  if (!command) {
-    console.error(`No command matching ${interaction.commandName} was found.`);
-    return;
-  }
-
-  try {
-    await command.execute(interaction);
-  } catch (error) {
-    console.error(error);
-    if (interaction.replied || interaction.deferred) {
-      await interaction.followUp({
-        content: "There was an error while executing this command!",
-        ephemeral: true,
-      });
-    } else {
-      await interaction.reply({
-        content: "There was an error while executing this command!",
-        ephemeral: true,
-      });
-    }
-  }
-});
-
-client.once(Events.ClientReady, (c) => {
-  console.log(`Ready! Logged in as ${c.user.tag}`);
- console.log(`Cliente listo para el servidor: ${client.guilds.cache.get("1171148610705031279").name}`)
-});
-
 
 
 
