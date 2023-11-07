@@ -93,6 +93,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
 client.once(Events.ClientReady, (c) => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
+ console.log(`Cliente listo para el servidor: ${client.guilds.cache.get("1171148610705031279").name}`)
 });
 
 
