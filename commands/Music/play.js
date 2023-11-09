@@ -69,7 +69,7 @@ module.exports = {
        member: interaction.member,
      });
       await interaction.reply(`reproduciendo **${name}**`);
-      console.info(`Reproduciendo ${url} en ${interaction.guild.name}`)
+      console.info(`Reproduciendo: ${url} - ${interaction.guild.name}`)
     });
 
   },
