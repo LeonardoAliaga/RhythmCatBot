@@ -15,8 +15,9 @@
     "@distube/spotify": "^1.5.1",
     "discord.js": "^14.12.1",
     "distube": "^4.0.3",
+    "ffbinaries": "^1.1.5",
     "ffmpeg": "^0.0.4",
-    "ffmpeg-static": "^5.2.0",
-    "libsodium-wrappers": "^0.7.13"
+    "libsodium-wrappers": "^0.7.13",
+    "opusscript": "^0.0.8"
   }
 }
