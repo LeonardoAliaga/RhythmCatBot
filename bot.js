@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const { Client, LocalAuth } = require("whatsapp-web.js");
-const { clientIdDc, guildIdDc, tokenDc } = require("./config.json");
+const { clientIdDc, guildIdDc, tokenDc } = require("./base/config.json");
 
 const qrcode = require("qrcode-terminal");
 const color = require("ansi-colors");
