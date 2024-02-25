@@ -32,7 +32,7 @@ whatsappClient.on("message", (message) => {
 });
 
 const sendMessage = (to, message) => {
-  whatsappClient.sendMessage(to, `${message}\n\n_PanquiBot_`);
+  whatsappClient.sendMessage(to, `${message}\n\n_RhythmCatBot_`);
 };
 const sendMedia = (to, file) => {
   const mediaFile = MessageMedia.fromFilePath(`./Discord/Sources/${file}.mp3`);
