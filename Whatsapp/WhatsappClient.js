@@ -1,4 +1,4 @@
-const { Client, LocalAuth } = require("whatsapp-web.js");
+const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
 
 const qrcode = require("qrcode-terminal");
 const color = require("ansi-colors");
@@ -34,5 +34,13 @@ whatsappClient.on("message", (message) => {
 const sendMessage = (to, message) => {
   whatsappClient.sendMessage(to, `${message}\n\n_PanquiBot_`);
 };
+const sendMedia = (to, file) => {
+  const mediaFile = MessageMedia.fromFilePath(`./Discord/Sources/${file}.mp3`);
+  whatsappClient.sendMessage(to, mediaFile);
+};
 
-module.exports = whatsappClient
+module.exports = {
+  whatsappClient,
+  sendMessage,
+  sendMedia
+};
