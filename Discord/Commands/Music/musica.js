@@ -56,7 +56,7 @@ module.exports = {
         sendMedia(`51${numero}@c.us`, data.videoTitle)
         sendMessage(`51${numero}@c.us`, data.youtubeUrl);
         return await interaction.editReply({
-          content: `Se a enviado **${data.videoTitle}** correctamente a \`${numero}\``, ephemeral: true
+          content: `Se ah enviado **${data.videoTitle}** correctamente a \`${numero}\``, ephemeral: true
         });
       });
       //sendMessage(numero, "xd")
