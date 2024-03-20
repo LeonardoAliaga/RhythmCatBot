@@ -60,11 +60,11 @@ whatsappClient.on('message_create', async (msg) => {
           // );
           //How to save that object as a file? =====================================
     
-          fs.writeFile("./public/upload/" + msg.timestamp + ".png", mediafile.data, "base64", (err) => {
+          fs.writeFile("./upload/" + msg.timestamp + ".png", mediafile.data, "base64", (err) => {
               if (err) {
                 console.log(err);
               }
-          convertToSticker(send, "./public/upload/" + msg.timestamp + ".png", content);
+          convertToSticker(send, "./upload/" + msg.timestamp + ".png", content);
             }
           );
           sendMessage(send, `Tu sticker **${content}** ya esta listo!`);
