@@ -6,6 +6,7 @@ const qrcode = require("qrcode-terminal");
 const color = require("ansi-colors");
 
 const prefix = 'y/';
+const fs = require("fs") 
 
 const whatsappClient = new Client({
   authStrategy: new LocalAuth(),
