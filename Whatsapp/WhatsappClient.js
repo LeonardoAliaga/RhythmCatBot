@@ -1,5 +1,7 @@
 const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
 
+const Wiki = require('wtf_wikipedia');
+
 const qrcode = require("qrcode-terminal");
 const color = require("ansi-colors");
 
