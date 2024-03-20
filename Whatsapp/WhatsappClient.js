@@ -5,6 +5,7 @@ const Wiki = require('wtf_wikipedia');
 const qrcode = require("qrcode-terminal");
 const color = require("ansi-colors");
 
+const prefix = 'y/';
 
 const whatsappClient = new Client({
   authStrategy: new LocalAuth(),
