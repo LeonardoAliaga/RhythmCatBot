@@ -18,18 +18,21 @@ const discordClient = new Discord.Client({
 
 // Create a new DisTube
 const distube = new DisTube(discordClient, {
-  searchSongs: 5,
-  emitNewSongOnly: true,
-  searchCooldown: 30,
-  leaveOnEmpty: false,
-  leaveOnFinish: false,
-  leaveOnStop: false,
-  plugins: [
-    new SpotifyPlugin({
-      parallel: true,
-      emitEventsAfterFetching: false,
-    }),
-  ],
+  // searchSongs: 5,
+  // emitNewSongOnly: true,
+  // searchCooldown: 30,
+  // leaveOnEmpty: false,
+  // leaveOnFinish: false,
+  // leaveOnStop: false,
+      plugins: [
+        new SpotifyPlugin({
+          // Aquí no debería estar el parámetro 'parallel'
+          api: {
+            clientId: "d0588ccfb246442ebfe093a6ca99e5e7",
+            clientSecret: "6802e0b54bb34d2c90513d5bdff1714e",
+          },
+        }),
+      ],
   //youtubeCookie: JSON.stringify(JSON.parse(fs.readFileSync("cookies.json"))),
 });
 
